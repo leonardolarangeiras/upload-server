@@ -1,6 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
 import { uploadImage } from '@/app/functions/upload-image'
+import { isRight, unwrapEither } from '@/infra/shared/either'
 
 export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
   server.post(
@@ -26,13 +27,23 @@ export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
         return reply.status(400).send({ message: 'File is required.' })
       }
 
-      await uploadImage({
+      const result = await uploadImage({
         fileName: uploadedFile.filename,
         contentType: uploadedFile.mimetype,
         contentStream: uploadedFile.file,
       })
 
-      return reply.status(201).send({ uploadId: 'teste' })
+      if (isRight(result)) {
+        console.log(unwrapEither(result))
+        return reply.status(201).send({ uploadId: result.right.url })
+      }
+
+      const error = unwrapEither(result)
+
+      switch (error.constructor.name) {
+        case 'InvalidFileFormat':
+          return reply.status(400).send({ message: error.message })
+      }
     }
   )
 }
