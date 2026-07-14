@@ -1,21 +1,21 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { type GetUploadsInput, getUploads } from '@/app/functions/get-uploads'
+import { getUploads } from '@/app/functions/get-uploads'
 import { unwrapEither } from '@/infra/shared/either'
 
-export const getUploadseRoute: FastifyPluginAsyncZod = async server => {
+export const getUploadsRoute: FastifyPluginAsyncZod = async server => {
   server.get(
     '/uploads',
     {
       schema: {
         summary: 'Get uploads',
         tags: ['uploads'],
-        queryString: z.object({
-          page: z.coerce.number().optional().default(1),
-          pageSize: z.coerce.number().optional().default(20),
+        querystring: z.object({
           searchQuery: z.string().optional(),
           sortBy: z.enum(['createdAt']).optional(),
           sortDirection: z.enum(['asc', 'desc']).optional(),
+          page: z.coerce.number().optional().default(1),
+          pageSize: z.coerce.number().optional().default(20),
         }),
         response: {
           200: z.object({
