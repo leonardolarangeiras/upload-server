@@ -26,6 +26,9 @@ importers:
       '@fastify/swagger-ui':
         specifier: ^5.2.6
         version: 5.2.6
+      csv-stringify:
+        specifier: ^6.8.1
+        version: 6.8.1
       dayjs:
         specifier: ^1.11.21
         version: 1.11.21
@@ -1039,6 +1042,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  csv-stringify@6.8.1:
+    resolution: {integrity: sha512-tZ6X6TKQyQgCo5OptXcyAbfN1pwmoxEqELPQ7KFazNErx7kiVsDK8o+VYRXhfMl4N9vvOOLXuioquR2MeP847A==}
 
   dayjs@1.11.21:
     resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
@@ -2614,6 +2620,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  csv-stringify@6.8.1: {}
 
   dayjs@1.11.21: {}
 
